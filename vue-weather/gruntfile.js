@@ -8,8 +8,10 @@ module.exports = function(grunt){
         copy: {
             //Targets/Contexts
             t1: {
-                src: '',
-                dest: ''
+                cwd:'src/',
+                src: 'assets/*',
+                dest: 'dist/',
+                expand: true
             }
         },
         //Concat Task - Takes js or css files and merges into one file.
@@ -23,21 +25,21 @@ module.exports = function(grunt){
                 dest: 'build/css/styles.css'
             }
         },
-        // uglify: {
-        //     options: {
-        //         // the banner is inserted at the top of the output
-        //         banner: '/*! <%=pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-        //     },
-        //     dist: {
-        //         files: {
-        //             'dist/ <%= pkg.name %>.min.css': ['<%= concat.css.dest %> ']
-        //         }
-        //     }
-        // },
+        uglify: {
+            options: {
+                // the banner is inserted at the top of the output
+                banner: '/*! <%=pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+            },
+            dist: {
+                files: {
+                    'dist/js/<%= pkg.name %>.min.js': ['<%= concat.js.dest %>']
+                }
+            }
+        },
         cssmin: {
             dist: {
                 files: {
-                    'dist/main.css': ['<%= concat.css.dest %> ']
+                    'dist/css/main.css': ['<%= concat.css.dest %> ']
                 }
             }
         },
@@ -63,5 +65,5 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('build', ['concat', 'cssmin', 'jshint']);
+    grunt.registerTask('build', ['copy','concat', 'cssmin', 'uglify', 'jshint']);
 };

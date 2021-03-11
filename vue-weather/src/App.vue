@@ -28,6 +28,7 @@
 </template>
 
 <script>
+var lib = require('../dist/js/vue-weather.min.js');
 
 export default {
   name: 'App',
@@ -45,28 +46,22 @@ export default {
       if (e.key == "Enter"){
         fetch(`${this.url_base}weather?q=${this.query}&units=imperial&APPID=${this.api_key}`).then(res => {
           return res.json();
-        }).then(this.setResults);
+        }).then(this.setResults).then(this.logResults);
       }
     },
     setResults(results) {
       this.weather = results;
     },
     dateBuilder(){
-      let d = new Date();
-      let months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-      let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-      let day = days[d.getDay()];
-      let date = d.getDate();
-      let month = months[d.getMonth()];
-      let year = d.getFullYear();
-
-      return `${day} ${date} ${month} ${year}`;
+      return lib.getDate();
+    },
+    logResults(){
+      return lib.logResults(this.weather);
     }
   }
 }
 </script>
 
 <style>
-  @import '../dist/main.css';
+  @import '../dist/css/main.css';
 </style>

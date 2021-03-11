@@ -14,7 +14,6 @@
     font-style: italic;
     text-align: center;
   }
-
 * {
     margin: 0;
     padding: 0;
@@ -26,11 +25,11 @@
   }
   
   #app {
-    background-image: url('../src/assets/cold-bg.jpg');
+    background-image: url('../assets/cold-bg.jpg');
   }
   
   #app.warm {
-    background-image: url('../src/assets/warm-bg.jpg');
+    background-image: url('../assets/warm-bg.jpg');
   }
   
   main {

@@ -10,8 +10,3 @@ exports.getDate = () => {
 
     return `${day} ${date} ${month} ${year}`;
 };
-
-exports.logResults = (weather) => {
-    console.log(weather);
-    console.log('testing 123');
-};
